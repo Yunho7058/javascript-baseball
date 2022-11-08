@@ -6,7 +6,7 @@ class App {
   }
   play() {
     this.print('숫자 야구 게임을 시작합니다.');
-    this.selectNumber();
+    this.gameProcess();
   }
 
   print(str) {
@@ -15,7 +15,7 @@ class App {
   setNumber() {
     return MissionUtils.Random.pickUniqueNumbersInRange(1, 9, 3);
   }
-  selectNumber() {
+  gameProcess() {
     MissionUtils.Console.readLine('숫자를 입력해주세요 : ', (answer) => {
       let exception = this.handleException(answer);
       if (exception) {
@@ -28,10 +28,10 @@ class App {
           return this.reStart();
         } else {
           if (result[1] === 0 && result[0] === 0) {
-            this.selectNumber();
+            this.gameProcess();
             return this.print('낫싱');
           } else if (result[1] || result[0]) {
-            this.selectNumber();
+            this.gameProcess();
             return this.resultMessage(result);
           }
         }
@@ -50,7 +50,7 @@ class App {
       (answer) => {
         if (answer === '1') {
           this.correctAnswer = this.setNumber();
-          this.selectNumber();
+          this.gameProcess();
         } else {
           this.gameOver();
         }
